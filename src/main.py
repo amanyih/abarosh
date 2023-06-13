@@ -1,12 +1,14 @@
 import pygame
+from config import *
+from level import Level
 
 
 def main():
     pygame.init()
     pygame.display.set_caption("abarosh")
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode((screen_width, screen_height))
     clock = pygame.time.Clock()
-
+    level = Level(screen)
     running = True
 
     while running:
@@ -17,6 +19,7 @@ def main():
                 quit()
 
         screen.fill((0, 0, 0))
+        level.play()
 
         pygame.display.flip()
 
