@@ -1,9 +1,10 @@
 import pygame
 
 
-class Player(pygame.sprite.Sprite):
+class Police(pygame.sprite.Sprite):
 
     def __init__(self, position) -> None:
+        print("police, police, police")
 
         super().__init__()
         self.image = pygame.Surface((20, 40))
@@ -17,20 +18,26 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=position)
 
     def collectInputs(self):
+        print("collecting inputs")
 
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_LEFT]:
+        # TODO: Add a way to move left and right with a and d
+        # TODO: Add a way to move up and down with w and s
+
+        if keys[pygame.K_a]:
             self.direction.x = -1
+            print("left")
             # self.rect.x -= self.speed
-        elif keys[pygame.K_RIGHT]:
+        elif keys[pygame.K_d]:
+            print("right")
             self.direction.x = 1
         else:
             self.direction.x = 0
             # self.rect.x += self.speed
 
-        if keys[pygame.K_UP]:
-            print("jump")
+        if keys[pygame.K_w]:
+            # print("jump")
             self.jump()
 
     def applyGravity(self):
