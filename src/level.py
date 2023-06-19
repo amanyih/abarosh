@@ -98,19 +98,20 @@ class Level:
                 self.police.sprite.freezed = True
                 print("የማርያም መንገድ")
                 self.startTime = pygame.time.get_ticks()
-                self.message_board.sprite.title = "Yemariam -- Menged"
+                self.message_board.sprite.title = "የማርያም መንገድ"
                 
 
         if self.police.sprite.freezed:
             current_time = pygame.time.get_ticks()
             countdown_time_remaining = self.duration - (current_time - self.startTime)
-            self.message_board.sprite.subtitle = str(countdown_time_remaining //1000)
+            self.message_board.sprite.leading = str(countdown_time_remaining //1000)
 
         
         if self.police.sprite.freezed and pygame.time.get_ticks() - self.startTime >= self.duration:
             print("የማርያም መንገድ ተከፍተዋል")
             self.message_board.sprite.subtitle = ""
             self.message_board.sprite.title = ""
+            self.message_board.sprite.leading = ""
             self.police.sprite.freezed = False
                 # quit()
 
