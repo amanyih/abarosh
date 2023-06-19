@@ -1,9 +1,10 @@
 import pygame
 import os
 import sys
-path = os.path.abspath('C:/Users/yosef21/OneDrive/Desktop/Assignments/Graphics/abarosh/src/support.py')
+path = os.path.abspath('abarosh/src/support.py')
 sys.path.append(path)
 from support import import_folder
+from config import *
 
 class Player(pygame.sprite.Sprite):
 
@@ -29,6 +30,8 @@ class Player(pygame.sprite.Sprite):
         self.speed = 8
         self.gravity = 0.8
         self.jump_speed = -16
+
+        self.lives = 3
         self.direction = pygame.math.Vector2(0, 0)
     
         # status
@@ -50,7 +53,9 @@ class Player(pygame.sprite.Sprite):
             self.animations[animation] = import_folder(path)
             # print(self.animations[animation])
          
-    def collectInputs(self):
+
+
+    def collectInputs(self,):
 
         keys = pygame.key.get_pressed()
 
@@ -76,7 +81,6 @@ class Player(pygame.sprite.Sprite):
     def jump(self):
         self.direction.y = self.jump_speed
         # self.applyGravity()
-
     def get_status(self):
         if self.direction.y < 0:
             self.status =  'jump'
@@ -131,7 +135,8 @@ class Player(pygame.sprite.Sprite):
                 flipped_dust_particle = pygame.transform.flip(dust_particle,True,False)
                 self.display_surface.blit(flipped_dust_particle,pos)
 
-    def update(self):
+
+    def update(self, ):
         self.collectInputs()
         self.applyGravity()
         self.get_status()

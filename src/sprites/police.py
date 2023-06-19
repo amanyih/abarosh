@@ -1,9 +1,13 @@
 import pygame
 import os
 import sys
-path = os.path.abspath('C:/Users/yosef21/OneDrive/Desktop/Assignments/Graphics/abarosh/src/support.py')
+path = os.path.abspath('abarosh/src/support.py')
 sys.path.append(path)
 from support import import_folder
+
+from config import *
+
+
 
 class Police(pygame.sprite.Sprite):
 
@@ -29,6 +33,12 @@ class Police(pygame.sprite.Sprite):
         self.speed = 8
         self.gravity = 0.8
         self.jump_speed = -16
+        self.image = pygame.Surface((20, 40))
+        self.image.fill((0, 0, 255))
+        self.speed = 10
+        self.gravity = 0.8
+        self.jump_speed = -16
+        self.freezed = False
         self.direction = pygame.math.Vector2(0, 0)
 
         # status
@@ -52,7 +62,8 @@ class Police(pygame.sprite.Sprite):
             print(self.animations[animation])
 
     def collectInputs(self):
-        print("collecting inputs")
+
+        # print("collecting inputs")
 
         keys = pygame.key.get_pressed()
 
@@ -60,11 +71,15 @@ class Police(pygame.sprite.Sprite):
         # TODO: Add a way to move up and down with w and s
 
         if keys[pygame.K_a]:
+            if self.freezed:
+                return
             self.direction.x = -1
             self.facing_right = False
             print("left")
             # self.rect.x -= self.speed
         elif keys[pygame.K_d]:
+            if self.freezed:
+                return
             print("right")
             self.facing_right = True
             self.direction.x = 1
@@ -122,7 +137,7 @@ class Police(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midtop = self.rect.midtop)
 
 
-    def update(self):
+    def update(self, ):
         self.collectInputs()
         self.applyGravity()
         self.get_status()
