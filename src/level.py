@@ -33,9 +33,13 @@ class Level:
 
     def horizontal_collision(self):
         player = self.player.sprite
-        player.rect.x += player.direction.x * player.speed
-
         police = self.police.sprite
+
+        if player.rect.colliderect(police.rect):
+            print("gameover")
+            # quit()
+
+        player.rect.x += player.direction.x * player.speed
         police.rect.x += police.direction.x * police.speed
 
         for sprite in self.tiles.sprites():
@@ -77,7 +81,7 @@ class Level:
                     police.rect.top = sprite.rect.bottom
                     police.direction.y = 0
 
-    def scrollx(self,):
+    def scrollx(self):
         player = self.player.sprite
         playerx = player.rect.centerx
         directionx = player.direction.x
@@ -86,26 +90,38 @@ class Level:
         policex = police.rect.centerx
         directionPolicex = police.direction.x
 
+        # if abs(playerx - policex) >= screen_width/2:
+        #     return
+
         if playerx < (screen_width / 4) and directionx < 0:
             self.shift = 8
+            police.direction.x = 1
+            police.rect.x += police.direction.x * police.speed
             player.speed = 0
         elif playerx > screen_width - screen_width / 4 and directionx > 0:
             self.shift = -8
+            police.direction.x = -1
+            police.rect.x += police.direction.x * police.speed
             player.speed = 0
         else:
             self.shift = 0
+            police.speed = 8
             player.speed = 8
 
-        if policex < (screen_width / 4) and directionPolicex < 0:
-
-            self.shift = 8
-            police.speed = 0
-        elif policex > screen_width - screen_width / 4 and directionPolicex > 0:
+        if policex > screen_width - screen_width / 4 and directionPolicex > 0:
             self.shift = -8
+            player.direction.x = -1
+            player.rect.x += player.direction.x * player.speed
             police.speed = 0
-        else:
-            self.shift = 0
-            police.speed = 8
+        elif policex < (screen_width / 4) and directionPolicex < 0:
+            self.shift = 8
+            player.direction.x = 1
+            player.rect.x += player.direction.x * player.speed
+            police.speed = 0
+        # else:
+        #     self.shift = 0
+        #     police.speed = 8
+        #     player.speed = 8
 
     def play(self):
         self.tiles.update(self.shift)
@@ -114,6 +130,6 @@ class Level:
         self.police.draw(self.screen)
         self.player.update()
         self.police.update()
-        self.scrollx()
         self.vertical_collision()
         self.horizontal_collision()
+        self.scrollx()

@@ -1,4 +1,5 @@
 import pygame
+from config import *
 
 
 class Player(pygame.sprite.Sprite):
@@ -16,7 +17,7 @@ class Player(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(topleft=position)
 
-    def collectInputs(self):
+    def collectInputs(self, ):
 
         keys = pygame.key.get_pressed()
 
@@ -41,6 +42,6 @@ class Player(pygame.sprite.Sprite):
         self.direction.y = self.jump_speed
         # self.applyGravity()
 
-    def update(self):
+    def update(self, ):
         self.collectInputs()
         self.applyGravity()

@@ -1,5 +1,7 @@
 import pygame
 
+from config import *
+
 
 class Police(pygame.sprite.Sprite):
 
@@ -8,7 +10,7 @@ class Police(pygame.sprite.Sprite):
 
         super().__init__()
         self.image = pygame.Surface((20, 40))
-        self.image.fill((255, 0, 0))
+        self.image.fill((0, 0, 255))
         self.speed = 5
         self.gravity = 0.8
         self.jump_speed = -16
@@ -18,7 +20,7 @@ class Police(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=position)
 
     def collectInputs(self):
-        print("collecting inputs")
+        # print("collecting inputs")
 
         keys = pygame.key.get_pressed()
 
@@ -48,6 +50,6 @@ class Police(pygame.sprite.Sprite):
         self.direction.y = self.jump_speed
         # self.applyGravity()
 
-    def update(self):
+    def update(self, ):
         self.collectInputs()
         self.applyGravity()
