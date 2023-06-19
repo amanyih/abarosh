@@ -12,12 +12,13 @@ class Player(pygame.sprite.Sprite):
         self.speed = 5
         self.gravity = 0.8
         self.jump_speed = -16
+        self.lives = 3
 
         self.direction = pygame.math.Vector2(0, 0)
 
         self.rect = self.image.get_rect(topleft=position)
 
-    def collectInputs(self, ):
+    def collectInputs(self,):
 
         keys = pygame.key.get_pressed()
 

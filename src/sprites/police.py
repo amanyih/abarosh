@@ -14,12 +14,14 @@ class Police(pygame.sprite.Sprite):
         self.speed = 5
         self.gravity = 0.8
         self.jump_speed = -16
+        self.freezed = False
 
         self.direction = pygame.math.Vector2(0, 0)
 
         self.rect = self.image.get_rect(topleft=position)
 
     def collectInputs(self):
+
         # print("collecting inputs")
 
         keys = pygame.key.get_pressed()
@@ -28,10 +30,14 @@ class Police(pygame.sprite.Sprite):
         # TODO: Add a way to move up and down with w and s
 
         if keys[pygame.K_a]:
+            if self.freezed:
+                return
             self.direction.x = -1
             print("left")
             # self.rect.x -= self.speed
         elif keys[pygame.K_d]:
+            if self.freezed:
+                return
             print("right")
             self.direction.x = 1
         else:
