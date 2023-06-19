@@ -11,7 +11,7 @@ class Police(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface((20, 40))
         self.image.fill((0, 0, 255))
-        self.speed = 5
+        self.speed = 10
         self.gravity = 0.8
         self.jump_speed = -16
         self.freezed = False

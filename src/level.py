@@ -44,7 +44,7 @@ class Level:
     def draw_stones(self):
         self.stones = pygame.sprite.Group()
         tiles_group = self.tiles.sprites()
-        for i in range(10):
+        for i in range(200):
             tile = random.choice(tiles_group)
 
             stone_pos = tile.rect.center
