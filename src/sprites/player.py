@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
         self.on_right = False
         self.on_left = False
     def import_character_states(self):
-        character_path = 'graphics/character/'
+        character_path = 'graphics/character/player/'
         self.animations = {'idle':[],'run':[],'jump':[],'fall':[]}
 
         for animation in self.animations.keys():
