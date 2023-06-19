@@ -11,6 +11,8 @@ class Level:
         self.screen = screen
         self.shift = 0
         self.draw_levels(lst_tile)
+        self.current_x = 0
+        self.current_x_police = 0
 
     def draw_levels(self, levels):
         self.tiles = pygame.sprite.Group()
@@ -23,11 +25,11 @@ class Level:
                     self.tiles.add(tile)
 
                 if cell == "P":
-                    player = Player((x * tile_size, y * tile_size + 20))
+                    player = Player((x * tile_size, y * tile_size + 20),self.screen)
                     self.player.add(player)
 
                 if cell == "G":
-                    police = Police((x * tile_size, y * tile_size + 20))
+                    police = Police((x * tile_size, y * tile_size + 20),self.screen)
                     self.police.add(police)
                     pass
 
@@ -42,15 +44,32 @@ class Level:
             if sprite.rect.colliderect(player.rect):
                 if player.direction.x < 0:
                     player.rect.left = sprite.rect.right
+                    player.on_left = True
+                    self.current_x = player.rect.left
+
                 elif player.direction.x > 0:
                     player.rect.right = sprite.rect.left
+                    player.on_right = True
+                    self.current_x = player.rect.right
+            if player.on_left and (player.rect.left < self.current_x or player.direction.x >= 0):
+                player.on_left = False
+            if player.on_right and (player.rect.right > self.current_x or player.direction.x <= 0):
+                player.on_right = False
 
         for sprite in self.tiles.sprites():
             if sprite.rect.colliderect(police.rect):
                 if police.direction.x < 0:
                     police.rect.left = sprite.rect.right
+                    police.on_left = True
+                    self.current_x_police = police.rect.left
                 elif police.direction.x > 0:
                     police.rect.right = sprite.rect.left
+                    police.on_right = True
+                    self.current_x_police = police.rect.right
+            if police.on_left and (police.rect.left < self.current_x_police or police.direction.x >= 0):
+                police.on_left = False
+            if police.on_right and (police.rect.right > self.current_x_police or police.direction.x <= 0):
+                police.on_right = False
 
     def vertical_collision(self):
         player = self.player.sprite
@@ -64,18 +83,32 @@ class Level:
                 if player.direction.y > 0:
                     player.rect.bottom = sprite.rect.top
                     player.direction.y = 0
+                    player.on_ground = True
+                    
                 elif player.direction.y < 0:
                     player.rect.top = sprite.rect.bottom
                     player.direction.y = 0
+                    player.on_ceiling = True
+        if player.on_ground and player.direction.y < 0 or player.direction.y > 1:
+            player.on_ground = False
+        if player.on_ceiling and player.direction.y > 0:
+            player.on_ceiling = False
+        
 
         for sprite in self.tiles.sprites():
             if sprite.rect.colliderect(police.rect):
                 if police.direction.y > 0:
                     police.rect.bottom = sprite.rect.top
                     police.direction.y = 0
+                    police.on_ground = True
                 elif police.direction.y < 0:
                     police.rect.top = sprite.rect.bottom
                     police.direction.y = 0
+                    police.on_ceiling = True
+        if police.on_ground and police.direction.y < 0 or police.direction.y > 1:
+            police.on_ground = False
+        if police.on_ceiling and police.direction.y > 0:
+            police.on_ceiling = False
 
     def scrollx(self,):
         player = self.player.sprite
