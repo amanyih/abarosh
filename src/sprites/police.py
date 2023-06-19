@@ -54,8 +54,15 @@ class Police(pygame.sprite.Sprite):
 
     def jump(self):
         self.direction.y = self.jump_speed
+
+    def colorPolice(self):
+        if self.freezed:
+            self.image.fill((150, 150, 150))
+        else:
+            self.image.fill((0, 0, 255))
         # self.applyGravity()
 
     def update(self, ):
         self.collectInputs()
+        self.colorPolice()
         self.applyGravity()
