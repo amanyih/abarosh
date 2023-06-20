@@ -60,9 +60,9 @@ class MessageBoard(pygame.sprite.Sprite):
             (current_time - self.globalTime)
 
         if countdown_time_remaining <= 0:
-            pygame.mixer.music.load('src/gameover_sound.wav')
+            pygame.mixer.music.load('assets/sounds/gameover_sound.wav')
             pygame.mixer.music.play()
-            State.current_page = 'GAMEOVER'
+            State.current_page = 'GAMEWON'
             return 
 
         formatted_time = countdown_time_remaining // 1000

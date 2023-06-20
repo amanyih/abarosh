@@ -94,7 +94,7 @@ class Police(pygame.sprite.Sprite):
         self.rect.y += self.direction.y
 
     def jump(self):
-        pygame.mixer.music.load('src/jump.wav')
+        pygame.mixer.music.load('assets/sounds/jump.wav')
         pygame.mixer.music.play()
         self.direction.y = self.jump_speed
 
@@ -148,6 +148,7 @@ class Police(pygame.sprite.Sprite):
 
     def update(self, ):
         # self.colorPolice()
+        # self.collectInputs()
         self.applyGravity()
         self.get_status()
         self.animate()

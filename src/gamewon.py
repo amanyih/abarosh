@@ -4,7 +4,7 @@ import sys
 from state import State
 
 
-class Gameover:
+class Gamewon:
 
     def __init__(self):
         # Initialize Pygame
@@ -13,7 +13,7 @@ class Gameover:
         # Set up the screen
         screen_width, screen_height = 800, 600
         screen = pygame.display.set_mode((screen_width, screen_height))
-        pygame.display.set_caption("Game Over")
+        pygame.display.set_caption("YOU WON!!!")
         background = pygame.image.load("assets/background/bg1.jpeg")
         background = pygame.transform.scale(background, (screen_width, screen_height))
 
@@ -27,7 +27,7 @@ class Gameover:
 
         # Set up scores
         current_score = 100  # Replace with your current score
-        current_winner = "ፖሊስ"
+        current_winner = "ሌባ"
 
         # Set up buttons
         button_width, button_height = 200, 50
@@ -86,7 +86,6 @@ class Gameover:
            
             current_winner_text = font.render(f"አሸናፊ: {current_winner}", True, WHITE)
 
-            
             screen.blit(
                 current_winner_text,
                 ((screen_width - current_winner_text.get_width()) // 2, 150),

@@ -5,6 +5,9 @@ from state import State
 from game import Game
 from gameover import Gameover
 from mainmenu import MainMenu
+from controls import Controls
+from gamewon import Gamewon
+
 State.current_page = "MAINMENU"
 quit = False
 
@@ -13,7 +16,6 @@ while not quit:
         MainMenu()
 
     elif State.current_page == "PLAY":
-        print('hey')
         Game()
 
     elif State.current_page == "QUIT":
@@ -22,5 +24,8 @@ while not quit:
     elif State.current_page == "GAMEOVER":
         Gameover()
 
-    # elif State.current_page == "GAMEWON":
-    #     GameWon()
+    elif State.current_page == "CONTROLS":
+        Controls()
+
+    elif State.current_page == "GAMEWON":
+        Gamewon()

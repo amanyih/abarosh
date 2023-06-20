@@ -86,7 +86,7 @@ class Level:
         if player.rect.colliderect(police.rect) and police.freezed == False:
             print("gameover")
             State.current_page = 'GAMEOVER'
-            pygame.mixer.music.load('src/gameover_sound.wav')
+            pygame.mixer.music.load('assets/sounds/gameover_sound.wav')
             pygame.mixer.music.play()
             return 
             # quit()

@@ -7,7 +7,7 @@ class MainMenu:
         pygame.mixer.init()
 
 #Load audio file
-        pygame.mixer.music.load('src/song.mp3')
+        pygame.mixer.music.load('assets/sounds/song.mp3')
 
         print("music started playing....")
 
@@ -21,7 +21,7 @@ class MainMenu:
         screen_height = 600
         screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption("አባሮሽ")
-        background = pygame.image.load("src/bg2.png")
+        background = pygame.image.load("assets/background/bg2.png")
         background = pygame.transform.scale(background, (screen_width, screen_height))
 
         # Set up the font
@@ -58,6 +58,10 @@ class MainMenu:
                     elif quit_button.collidepoint(mouse_pos):
                         # Quit the game
                         State.current_page = "QUIT"
+                        running = False
+                        break
+                    elif controls_button.collidepoint(mouse_pos):
+                        State.current_page = "CONTROLS"
                         running = False
                         break
 
