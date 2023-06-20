@@ -12,7 +12,7 @@ right_tile = pygame.transform.scale(pygame.image.load(
 middle_tile = pygame.transform.scale(pygame.image.load(
     "assets/tiles/4.png"), (tile_size, tile_size))
 single_tile = pygame.transform.scale(pygame.image.load(
-    "assets/tiles/5.png"), (tile_size, tile_size))
+    "assets/tiles/floating.png"), (tile_size, tile_size))
 
 
 class Tile(pygame.sprite.Sprite):

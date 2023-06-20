@@ -14,11 +14,12 @@ class Gamewon:
         screen_width, screen_height = 800, 600
         screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption("YOU WON!!!")
-        background = pygame.image.load("assets/background/bg1.jpeg")
+        background = pygame.image.load("assets/background/introBackground.png")
         background = pygame.transform.scale(background, (screen_width, screen_height))
 
         # Set up fonts
         font = pygame.font.SysFont('nyala', 25) 
+        fontH = pygame.font.SysFont('nyala', 80) 
         # Set up colors
         WHITE = (255, 255, 255)
         BLACK = (0, 0, 0)
@@ -84,7 +85,7 @@ class Gamewon:
 
             # Draw score
            
-            current_winner_text = font.render(f"አሸናፊ: {current_winner}", True, WHITE)
+            current_winner_text = fontH.render(f"አሸናፊ: {current_winner}", True, BLACK)
 
             screen.blit(
                 current_winner_text,
