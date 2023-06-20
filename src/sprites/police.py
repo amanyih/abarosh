@@ -48,8 +48,8 @@ class Police(pygame.sprite.Sprite):
         self.on_left = False
 
     def import_character_states(self):
-        character_path = 'graphics/character/'
-        self.animations = {'idle': [], 'run': [], 'jump': [], 'fall': []}
+        character_path = 'graphics/character/police/'
+        self.animations = {'idle':[],'run':[],'jump':[],'fall':[]}
 
         for animation in self.animations.keys():
             path = character_path + animation
@@ -147,8 +147,8 @@ class Police(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midtop=self.rect.midtop)
 
     def update(self, ):
+        self.collectInputs()
         # self.colorPolice()
-        # self.collectInputs()
         self.applyGravity()
         self.get_status()
         self.animate()

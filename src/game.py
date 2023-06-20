@@ -28,4 +28,4 @@ class Game:
 
             pygame.display.flip()
 
-            clock.tick(120)
+            clock.tick(60)
