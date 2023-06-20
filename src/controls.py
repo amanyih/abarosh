@@ -12,7 +12,7 @@ class Controls:
         screen = pygame.display.set_mode((screen_width, screen_height))
 
         # Set up the font
-        font = pygame.font.SysFont('nyala', 48)
+        font = pygame.font.SysFont('nyala', 35)
 
         # Set up the text
         # It will be two columns one for the controls of the cop and one for the controls of the thief

@@ -20,17 +20,17 @@ class MainMenu:
         screen_width = 800
         screen_height = 600
         screen = pygame.display.set_mode((screen_width, screen_height))
-        pygame.display.set_caption("አባሮሽ")
-        background = pygame.image.load("assets/background/bg2.png")
+        pygame.display.set_caption("ሌባ እና ፖሊስ")
+        background = pygame.image.load("assets/background/introBackground.png")
         background = pygame.transform.scale(background, (screen_width, screen_height))
 
         # Set up the font
         font = pygame.font.SysFont('nyala', 25)
-        larger_font = pygame.font.SysFont('nyala', 50)
+        larger_font = pygame.font.SysFont('nyala', 80)
 
 
         # Set up the text አባሮሽ with larger font size
-        text = larger_font.render("አባሮሽ", True, (255, 255, 255))
+        text = larger_font.render("ሌባ እና ፖሊስ", True, (0, 0, 0))
         text_rect = text.get_rect(center=(screen_width/2, screen_height/2 - 100))
 
         # Set up the buttons
