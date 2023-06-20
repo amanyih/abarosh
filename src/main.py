@@ -1,32 +1,26 @@
 import pygame
 from config import *
 from level import Level
+from state import State
+from game import Game
+from gameover import Gameover
+from mainmenu import MainMenu
+State.current_page = "MAINMENU"
+quit = False
 
+while not quit:
+    if State.current_page == "MAINMENU":
+        MainMenu()
 
-def main():
-    pygame.init()
-    pygame.display.set_caption("abarosh")
-    screen = pygame.display.set_mode((screen_width, screen_height))
-    clock = pygame.time.Clock()
-    level = Level(screen)
-    running = True
-    bg = pygame.transform.scale(pygame.image.load(
-        "assets/background/bg.jpg"), (screen_width, screen_height))
+    elif State.current_page == "PLAY":
+        print('hey')
+        Game()
 
-    while running:
-        screen.blit(bg, (0, 0))
+    elif State.current_page == "QUIT":
+        quit = True
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                quit()
+    elif State.current_page == "GAMEOVER":
+        Gameover()
 
-        # screen.fill((0, 0, 0))
-        level.play()
-
-        pygame.display.flip()
-
-        clock.tick(60)
-
-
-main()
+    # elif State.current_page == "GAMEWON":
+    #     GameWon()

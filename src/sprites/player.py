@@ -81,6 +81,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.direction.y
 
     def jump(self):
+        pygame.mixer.music.load('src/jump.wav')
+        pygame.mixer.music.play()
         self.direction.y = self.jump_speed
         # self.applyGravity()
 

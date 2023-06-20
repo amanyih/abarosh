@@ -6,6 +6,7 @@ from sprites.player import Player
 from sprites.police import Police
 from sprites.message_board import MessageBoard
 from sprites.stone import Stone
+from state import State
 
 
 class Level:
@@ -84,6 +85,10 @@ class Level:
 
         if player.rect.colliderect(police.rect) and police.freezed == False:
             print("gameover")
+            State.current_page = 'GAMEOVER'
+            pygame.mixer.music.load('src/gameover_sound.wav')
+            pygame.mixer.music.play()
+            return 
             # quit()
         
 
