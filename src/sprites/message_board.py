@@ -1,5 +1,5 @@
 import pygame
-
+from state import State
 
 class MessageBoard(pygame.sprite.Sprite):
 
@@ -16,7 +16,7 @@ class MessageBoard(pygame.sprite.Sprite):
         self.subtitle = ""
         self.trailing = "trailing"
         self.globalTime = pygame.time.get_ticks()
-        self.game_duration = 1000 * 120
+        self.game_duration = 1000 * 20
         # self.game_duration = 2000
 
     def draw_text(self, text, position, font):
@@ -60,7 +60,10 @@ class MessageBoard(pygame.sprite.Sprite):
             (current_time - self.globalTime)
 
         if countdown_time_remaining <= 0:
-            quit()
+            pygame.mixer.music.load('assets/sounds/gameover_sound.wav')
+            pygame.mixer.music.play()
+            State.current_page = 'GAMEWON'
+            return 
 
         formatted_time = countdown_time_remaining // 1000
 
