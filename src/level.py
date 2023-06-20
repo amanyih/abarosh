@@ -21,6 +21,26 @@ class Level:
         self.message_board = pygame.sprite.GroupSingle()
         self.message_board.add(MessageBoard(
             screen_width, 100, (0, 0),title=""),)
+    
+    def get_tile_type(self,x,y,levels):
+        # LT = left tile
+        # TM = top middle tile
+        # RT = right tile
+        # MT = middle tile
+        # ST = single tile
+        if x == 0 or y == 0 or x == len(levels[0]) - 1 or y == len(levels) - 1:
+            return "MT"
+        elif levels[y][x-1] == "-" and levels[y][x+1] == "-" and levels[y-1][x] == "-" and levels[y+1][x] == "-":
+            return "ST"
+        elif levels[y][x+1] == "-" and levels[y-1][x] == "-":
+            return "RT"
+        elif levels[y][x-1] == "-" and levels[y-1][x] == "-":
+            return "LT"
+        elif levels[y-1][x] != "-" and levels[y+1][x] != "-" and levels[y][x-1] == "-" and levels[y][x+1] == "-":
+            return "TM"
+        elif levels[y][x-1] != "-" and levels[y][x+1] != "-" and levels[y-1][x] != "-" and levels[y+1][x] != "-":
+            return "MT"
+        return "MT"
 
     def draw_levels(self, levels):
         # levels = levels * 100
@@ -30,7 +50,8 @@ class Level:
         for y, row in enumerate(levels):
             for x, cell in enumerate(row):
                 if cell == "X":
-                    tile = Tile(tile_size, (x * tile_size, y * tile_size))
+                    tile_type = self.get_tile_type(x,y,levels)
+                    tile = Tile(tile_size, (x * tile_size, y * tile_size), tile_type)
                     self.tiles.add(tile)
 
                 if cell == "P":
@@ -64,6 +85,7 @@ class Level:
         if player.rect.colliderect(police.rect) and police.freezed == False:
             print("gameover")
             # quit()
+        
 
         player.rect.x += player.direction.x * player.speed
         police.rect.x += police.direction.x * police.speed
@@ -238,7 +260,8 @@ class Level:
 
     def play(self):
         self.message_board.update()
-        self.message_board.draw(self.screen)
+        # self.message_board.draw(self.screen)
+        self.screen.blit(self.message_board.sprite.image, self.message_board.sprite.rect)
         self.tiles.update(self.shift)
         self.stones.update(self.shift)
         self.tiles.draw(self.screen)

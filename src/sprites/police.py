@@ -1,17 +1,15 @@
+from config import *
+from support import import_folder
 import pygame
 import os
 import sys
 path = os.path.abspath('abarosh/src/support.py')
 sys.path.append(path)
-from support import import_folder
-
-from config import *
-
 
 
 class Police(pygame.sprite.Sprite):
 
-    def __init__(self, position,surface) -> None:
+    def __init__(self, position, surface) -> None:
         print("police, police, police")
 
         super().__init__()
@@ -31,10 +29,10 @@ class Police(pygame.sprite.Sprite):
 
         # movement
         self.speed = 8
-        self.gravity = 0.8
+        self.gravity = 0.6
         self.jump_speed = -16
         self.image = pygame.Surface((20, 40))
-        self.image.fill((0, 0, 255))
+        # self.image.fill((0, 0, 255))
         self.speed = 10
         self.gravity = 0.8
         self.jump_speed = -16
@@ -51,7 +49,7 @@ class Police(pygame.sprite.Sprite):
 
     def import_character_states(self):
         character_path = 'graphics/character/'
-        self.animations = {'idle':[],'run':[],'jump':[],'fall':[]}
+        self.animations = {'idle': [], 'run': [], 'jump': [], 'fall': []}
 
         for animation in self.animations.keys():
             path = character_path + animation
@@ -104,9 +102,10 @@ class Police(pygame.sprite.Sprite):
         else:
             self.image.fill((0, 0, 255))
         # self.applyGravity()
+
     def get_status(self):
         if self.direction.y < 0:
-            self.status =  'jump'
+            self.status = 'jump'
         elif self.direction.y > 1:
             self.status = 'fall'
         else:
@@ -114,8 +113,11 @@ class Police(pygame.sprite.Sprite):
                 self.status = 'run'
             else:
                 self.status = 'idle'
+
     def import_dust_run_particles(self):
-        self.dust_run_particles = import_folder('../graphics/character/dust_particles/run')
+        self.dust_run_particles = import_folder(
+            '../graphics/character/dust_particles/run')
+
     def animate(self):
         animation = self.animations[self.status]
         self.frame_index += self.animation_speed
@@ -130,22 +132,21 @@ class Police(pygame.sprite.Sprite):
             self.image = pygame.transform.flip(image, True, False)
 
         if self.on_ground and self.on_right:
-            self.rect = self.image.get_rect(bottomright = self.rect.bottomright)
+            self.rect = self.image.get_rect(bottomright=self.rect.bottomright)
         elif self.on_ground and self.on_left:
-            self.rect = self.image.get_rect(bottomleft = self.rect.bottomleft)
+            self.rect = self.image.get_rect(bottomleft=self.rect.bottomleft)
         elif self.on_ground:
-            self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
+            self.rect = self.image.get_rect(midbottom=self.rect.midbottom)
         elif self.on_ceiling and self.on_right:
-            self.rect = self.image.get_rect(topright = self.rect.topright)
+            self.rect = self.image.get_rect(topright=self.rect.topright)
         elif self.on_ceiling and self.on_left:
-            self.rect = self.image.get_rect(topleft = self.rect.topleft)
+            self.rect = self.image.get_rect(topleft=self.rect.topleft)
         elif self.on_ceiling:
-            self.rect = self.image.get_rect(midtop = self.rect.midtop)
-
+            self.rect = self.image.get_rect(midtop=self.rect.midtop)
 
     def update(self, ):
-        self.collectInputs()
-        self.colorPolice()
+        # self.colorPolice()
         self.applyGravity()
         self.get_status()
         self.animate()
+        self.collectInputs()

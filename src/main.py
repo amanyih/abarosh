@@ -10,15 +10,18 @@ def main():
     clock = pygame.time.Clock()
     level = Level(screen)
     running = True
+    bg = pygame.transform.scale(pygame.image.load(
+        "assets/background/bg.jpg"), (screen_width, screen_height))
 
     while running:
+        screen.blit(bg, (0, 0))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
                 quit()
 
-        screen.fill((0, 0, 0))
+        # screen.fill((0, 0, 0))
         level.play()
 
         pygame.display.flip()
